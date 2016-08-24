@@ -11,15 +11,15 @@ class Cell{
 	unsigned int x;
 	unsigned int y;
 	vector<Edge> edges;
-	vector<Cell> neighbours;
+	vector<Cell *> neighbours;
 	public:Cell(unsigned int, unsigned int);
 		bool getVisited();
 		void addEdge(Edge);
-		void addNeighbour(Cell);
+		void addNeighbour(Cell*);
 		unsigned int getX();
 		unsigned int getY();
 		vector<Edge> getEdges();
-		vector<Cell> getNeighbours();
+		vector<Cell *> getNeighbours();
 		void setVisited();
 		
 };

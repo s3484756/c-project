@@ -13,7 +13,7 @@ void Cell::addEdge(Edge newEdge){
 	edges.push_back(newEdge);
 }
 
-void Cell::addNeighbour(Cell newNeighbour){
+void Cell::addNeighbour(Cell * newNeighbour){
 	neighbours.push_back(newNeighbour);
 }
 
@@ -29,7 +29,7 @@ vector<Edge> Cell::getEdges(){
 	return edges;
 }
 
-vector<Cell> Cell::getNeighbours(){
+vector<Cell *> Cell::getNeighbours(){
 	return neighbours;
 }
 

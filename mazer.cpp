@@ -14,15 +14,15 @@ void write_svg(vector<Edge> edges, char * filename, int width, int height){
 	sprintf(line, "<rect width='%d' height='%d' style='fill: black' />\n",width,height);
 	file << line;
 	for(unsigned int i = 0; i < edges.size();i++){
-		sprintf(line, "<line stroke='white' stroke-width='0.8' x1='%d' y1='%d' x2='%d' y2='%d'/>\n",edges.at(i).getX1(), edges.at(i).getY1(),
+		sprintf(line, "<line stroke='white' stroke-width='0.5' x1='%d' y1='%d' x2='%d' y2='%d'/>\n",edges.at(i).getX1(), edges.at(i).getY1(),
 		edges.at(i).getX2(), edges.at(i).getY2());
 		file << line;
 	}
 	file << "//<svg>\n";
 }
 
-int main(){
-	Generator newMaze(20,20,1);
+int main(int argc, char * argv[]){
+	Generator newMaze(atoi(argv[1]),atoi(argv[2]),atoi(argv[3]));
 	newMaze.generate();
 	write_svg(newMaze.getPaths(), "maze_generator_test.svg", newMaze.getMaze().getWidth(), newMaze.getMaze().getHeight());
 	return 0;

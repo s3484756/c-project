@@ -21,17 +21,17 @@ bool Generator::generate(){
 	holdX = distWidth(gen);
 	std::uniform_int_distribution<unsigned> distHeight(0,genMaze.getHeight()-1);
 	holdY =  distHeight(gen);
-	while(visited != genMaze.getHeight()*genMaze.getWidth()){
+	while(visited < genMaze.getHeight()*genMaze.getWidth()){
 		genMaze.setVisited(holdX,holdY);
 		std::uniform_int_distribution<unsigned> distN(0,genMaze.getCell(holdX,holdY).getNeighbours().size()-1);
 		nextCellIndex =  distN(gen);
-		if(genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex).getVisited() != true){
+		if(genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex)->getVisited() != true){
 			std::cout << visited << std::endl;
 			paths.push_back(genMaze.getCell(holdX,holdY).getEdges().at(nextCellIndex));
 			visited++;
 		}
-		holdX = genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex).getX();
-		holdY = genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex).getY();
+		holdX = genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex)->getX();
+		holdY = genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex)->getY();
 	}
 	
 	
