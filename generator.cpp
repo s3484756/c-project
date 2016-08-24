@@ -26,6 +26,7 @@ bool Generator::generate(){
 		std::uniform_int_distribution<unsigned> distN(0,genMaze.getCell(holdX,holdY).getNeighbours().size()-1);
 		nextCellIndex =  distN(gen);
 		if(genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex).getVisited() != true){
+			std::cout << visited << std::endl;
 			paths.push_back(genMaze.getCell(holdX,holdY).getEdges().at(nextCellIndex));
 			visited++;
 		}

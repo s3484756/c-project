@@ -4,6 +4,7 @@
  ***********************************************************************/
 
 #include "cell.h"
+#include <iostream>
 #ifndef MAZE
 #define MAZE
 
