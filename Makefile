@@ -3,8 +3,8 @@ CXXFLAGS=-Wall -pedantic -Wextra -std=c++14
 
 all:mazer
 
-mazer:mazer.o binaryIO.o generator.o maze.o cell.o edge.o 
-	$(CC) mazer.o binaryIO.o generator.o maze.o cell.o edge.o -o mazer
+mazer: svgWriter.o binaryIO.o mazer.o generator.o maze.o cell.o edge.o 
+	$(CC)svgWriter.o binaryIO.o mazer.o  generator.o maze.o cell.o edge.o -o mazer
 
 mazer.o:mazer.cpp
 	$(CC) $(CXXFLAGS) -c mazer.cpp
@@ -18,6 +18,8 @@ cell.o:cell.cpp
 	$(CC) $(CXXFLAGS) -c cell.cpp
 edge.o:edge.cpp
 	$(CC) $(CXXFLAGS) -c edge.cpp
+svgWriter.o:svgWriter.cpp
+	$(CC) $(CXXFLAGS) -c svgWriter.cpp
 
 .PHONY:clean
 clean:

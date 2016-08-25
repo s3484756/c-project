@@ -24,6 +24,7 @@ char * binaryRead(char * filename){
   }
   else 
 	cout << "Unable to open file";
+memblock = new char[1];
   return memblock;
 }
 
