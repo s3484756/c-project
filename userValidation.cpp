@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <regex> 
 using namespace std;
 bool binaryLoad(char *ag[]){
 	string validUser[5] = {"--lb","--sb","--sv",".maze",".svg"};
@@ -17,17 +18,18 @@ bool binaryLoad(char *ag[]){
 			cout << "invalid file type found for 2nd argument" << endl;
 			return false;
 		}
+		return true;
 	}
 
-	return true;
+	return false;
 }
-bool svgFile(char* ag[]){
+bool saveSvg(char* ag[], int argIndex){
 	/*this function will return true if it can save, the function will return false otherwise */
 	string flagSave = "--sv";
 	string saveExt = ".svg";
-	if(flagSave.compare(ag[3]) == 0){
+	if(flagSave.compare(ag[argIndex]) == 0){
 		cout << "saving file. " << endl;
-			string fileName = ag[4];
+			string fileName = ag[argIndex++];
 			size_t i = fileName.rfind(saveExt,fileName.length());
 				if(i!=string::npos){
 					cout << "Saving to " << fileName << endl;
@@ -43,3 +45,40 @@ bool svgFile(char* ag[]){
 
 		return true;
 }
+bool saveBinary(char* ag[], int argIndex){
+	string flagSave = "--sb";
+	string saveExt = ".maze";
+	if(flagSave.compare(ag[argIndex])==0){
+		cout << "saving binary" << endl;
+		string fileName = ag[argIndex++];
+		size_t i = fileName.rfind(saveExt,fileName.length());
+			if(i!=string::npos){
+				cout << "saving to " << fileName << endl;
+			}
+			else{
+				cout << "incorrect file extension, expects .maze" << endl;
+				return false;
+			}
+		return true;
+	}	
+	return false;
+}
+bool seedInput(char* ag[], int c){
+	string flag = "--g";
+	if(flag.compare(ag[1]) == 0){
+		cout << "flag --g entered " << endl;
+		regex r("[[:digit:]]+");
+	if(c >= 4){
+			if(regex_match(ag[2],r) && regex_match(ag[3],r)){
+				cout << "maze has height off " << ag[2] << endl;
+				cout << "maze has width off " << ag[3] << endl;
+			return true;
+			}
+		
+		}	
+	}
+	return false;
+}
+
+
+
