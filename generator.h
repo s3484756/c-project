@@ -5,11 +5,9 @@
 #include "maze.h"
 #ifndef MAZE_GENERATOR
 #define MAZE_GENERATOR
-
 #include <random>
 #include <chrono>
 #include <cstdlib>
-
 
 class Generator{
 	Maze genMaze;

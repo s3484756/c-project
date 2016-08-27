@@ -1,4 +1,4 @@
-
+#include "maze.h"
 #include <iostream>
 #include <fstream>
 void write_svg(vector<Edge> edges, char * filename, int width, int height){
