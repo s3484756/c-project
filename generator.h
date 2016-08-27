@@ -8,13 +8,15 @@
 #include <random>
 #include <chrono>
 #include <cstdlib>
+#include <time.h>
 
 class Generator{
 	Maze genMaze;
 	int seed;
 	unsigned int visited;
 	vector<Edge> paths; 
-	public:Generator(unsigned int,unsigned int, int);
+	public:Generator(unsigned int height,unsigned int width, int seed);
+	public:Generator(unsigned int height, unsigned int width);
 	    bool generate();
 		Maze getMaze();
 		vector<Edge> getPaths();

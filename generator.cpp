@@ -10,6 +10,11 @@ Generator::Generator (unsigned int width, unsigned int height,int randGen)
 	visited = 1;
 	
 }
+Generator::Generator(unsigned int width, unsigned int height) : genMaze(width,height){
+	srand(time(NULL));
+	seed = rand();
+	visited = 1;
+}
 
 bool Generator::generate(){
 	unsigned int holdX;

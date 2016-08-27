@@ -63,7 +63,7 @@ bool saveBinary(char* ag[], int argIndex){
 	}	
 	return false;
 }
-bool seedInput(char* ag[], int c){
+int seedInput(char* ag[], int c){
 	string flag = "--g";
 	if(flag.compare(ag[1]) == 0){
 		cout << "flag --g entered " << endl;
@@ -72,12 +72,13 @@ bool seedInput(char* ag[], int c){
 			if(regex_match(ag[2],r) && regex_match(ag[3],r)){
 				cout << "maze has height off " << ag[2] << endl;
 				cout << "maze has width off " << ag[3] << endl;
-			return true;
-			}
-		
-		}	
+			return 1;
+			}	
+		}
+		return 2;	
 	}
-	return false;
+	
+	return 0;
 }
 
 
