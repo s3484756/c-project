@@ -13,7 +13,6 @@
 //control for generated maze output
 void genOutput(char *argv[], int argc, int nextIndex, Generator gen){
 	int outputOpt = outputOptions(argv,argc,nextIndex);
-	cout << outputOpt << endl;
 	if (outputOpt == 1){
 		write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
 		binaryWrite(argv[nextIndex+3], gen);
@@ -43,7 +42,6 @@ int main(int argc, char * argv[]){
 	}
 	option = seedInput(argv, argc); 
 	if(option == 1){ //seed, width and height specified
-		cout << "input" <<endl;
 		Generator newMaze(atoi(argv[3]),atoi(argv[4]),atoi(argv[2]));
 		newMaze.generate();
 		nextIndex = 5;
@@ -58,9 +56,9 @@ int main(int argc, char * argv[]){
 		newMaze.generate();
 		nextIndex = 2;
 		genOutput(argv,argc,nextIndex,newMaze);
+		cout << "seed used is" << newMaze.getSeed() << endl;
 	}
 	else if(option == 3){ //no width or heoght specified, seed specified
-		cout << "No height or width specified, using default height of 100, and width of 100." << endl;
 		int h = 100;
 		int w = 100;
 		Generator newMaze(h,w,atoi(argv[2]));
@@ -69,13 +67,14 @@ int main(int argc, char * argv[]){
 		genOutput(argv,argc,nextIndex,newMaze);
 	}
 	else if(option == 4){//width and height specifed, seed not specified
-		cout << "here" << endl;
 		Generator newMaze(atoi(argv[2]),atoi(argv[3]));
 		newMaze.generate();
 		nextIndex = 4;
 		genOutput(argv,argc,nextIndex,newMaze);
+		cout << "seed used is" << newMaze.getSeed() << endl;
 	}
-	else if(option == 5){//loading maze from binary file and write to svg
+	// DOES NOT WORK
+	else if(option == 5){//loading maze from binary file and write it to svg
 		vector<int> data;
 		binaryRead(argv[2],&data);
 		vector<Edge> paths;
@@ -99,11 +98,7 @@ int main(int argc, char * argv[]){
 		write_svg(paths, argv[4], width, height);
 		return 0;
 	}
-/*	char str*;
-	strncpy(str,"maze.svg",sizeof("maze.svg"));
-	str[sizeof(str)-1] = '\0';
-	write_svg(newMaze.getPaths(), "maze_generator_test.svg", newMaze.getMaze().getWidth(), newMaze.getMaze().getHeight());
-*/
+
 	
 	return 0;
 }

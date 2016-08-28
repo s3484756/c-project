@@ -3,12 +3,11 @@
  * Student Number   : s3484756
  ***********************************************************************/
 #include "maze.h"
-
+//container class which holds each cell of the maze
 Maze::Maze (unsigned int setWidth, unsigned int setHeight){
 	height = setHeight;
 	width = setWidth;
 	//fills Maze with cells 
-	std::cout << "creating cells" << std::endl;
 	for(unsigned int i = 0; i < height;i++){
 		vector<Cell> row;
 		for(unsigned int j = 0; j < width;j++){
@@ -34,10 +33,8 @@ Maze::Maze (unsigned int setWidth, unsigned int setHeight){
 		cells.push_back(row);
 	}
 	// create list of neighbour cells for each cell
-	std::cout << "doing neighbours" << std::endl;
 	for(unsigned int i = 0; i < cells.size();i++){
 		for(unsigned int j = 0; j < cells.at(i).size();j++){
-			std::cout << j << std::endl; 
 			if(i < cells.size() - 1){
 				cells.at(i).at(j).addNeighbour(&cells.at(i+1).at(j));
 			}
@@ -52,10 +49,8 @@ Maze::Maze (unsigned int setWidth, unsigned int setHeight){
 			}
 		}
 	}
-	std::cout << "finished maze initialisation" << std::endl; 
+	
 }
-
-
 
 unsigned int Maze::getHeight(){
 	return height;

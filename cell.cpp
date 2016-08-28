@@ -1,4 +1,5 @@
 #include "cell.h"
+//container class which holds information 
 
 Cell::Cell (unsigned int xcoord, unsigned int ycoord){
 	x = xcoord;

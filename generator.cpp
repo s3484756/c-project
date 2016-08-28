@@ -15,7 +15,7 @@ Generator::Generator(unsigned int width, unsigned int height) : genMaze(width,he
 	seed = rand();
 	visited = 1;
 }
-
+//builds paths through the maze
 bool Generator::generate(){
 	unsigned int holdX;
 	unsigned int holdY;
@@ -33,7 +33,7 @@ bool Generator::generate(){
 		std::uniform_int_distribution<unsigned> distN(0,genMaze.getCell(holdX,holdY).getNeighbours().size()-1);
 		nextCellIndex =  distN(gen);
 		if(genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex)->getVisited() != true){
-			std::cout << visited << std::endl;
+			std::cout << "number of Cells Visited:" << visited << std::endl;
 			paths.push_back(genMaze.getCell(holdX,holdY).getEdges().at(nextCellIndex));
 			visited++;
 		}
