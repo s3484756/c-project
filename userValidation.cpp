@@ -1,7 +1,5 @@
-#include <string>
-#include <iostream>
-#include <regex> 
 
+#include "userValidation.h"
 using namespace std;
 bool binaryLoad(char *ag[]){
 	string validUser[5] = {"--lb","--sb","--sv",".maze",".svg"};
@@ -110,8 +108,10 @@ int seedInput(char* ag[], int c){
 int outputOptions(char* ag[], int c, int startIndex){
 	string svgFlag = "--sv";
 	string binaryFlag = "--sb";
-	if(startIndex + 3 <= c){
-		//save to svgFile and save to binary
+	//save to svgFile and save to binary
+	cout << startIndex << endl;
+	cout << ag[startIndex] << endl;
+	if (startIndex == c - 4){
 		if (svgFlag.compare(ag[startIndex]) == 0 && binaryFlag.compare(ag[startIndex+2]) == 0){
 			return 1;
 		}
@@ -119,8 +119,10 @@ int outputOptions(char* ag[], int c, int startIndex){
 		else if(binaryFlag.compare(ag[startIndex]) && svgFlag.compare(ag[startIndex+2]) == 0){
 			return 2;
 		}
+	}
+	else if(startIndex == c - 2){
 		//save to binary
-		else if(binaryFlag.compare(ag[startIndex]) == 0){
+		if(binaryFlag.compare(ag[startIndex]) == 0){
 			return 3;
 		}
 		//save to svgFile 
@@ -128,6 +130,7 @@ int outputOptions(char* ag[], int c, int startIndex){
 			return 4;
 		}
 	}
+
 	return 0;
 	
 }

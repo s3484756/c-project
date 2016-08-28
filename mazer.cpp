@@ -3,7 +3,7 @@
  * Student Number   : s3484756
  ***********************************************************************/
 #include "generator.h"
-#include "userValidation.cpp"
+#include "userValidation.h"
 #include "binaryIO.h"
 #include "svgWriter.cpp"
 #include <iostream>
@@ -13,6 +13,7 @@
 //control for generated maze output
 void genOutput(char *argv[], int argc, int nextIndex, Generator gen){
 	int outputOpt = outputOptions(argv,argc,nextIndex);
+	cout << outputOpt << endl;
 	if (outputOpt == 1){
 		write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
 		binaryWrite(argv[nextIndex+3], gen);
