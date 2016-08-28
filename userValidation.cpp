@@ -65,19 +65,44 @@ bool saveBinary(char* ag[], int argIndex){
 }
 int seedInput(char* ag[], int c){
 	string flag = "--g";
-	if(flag.compare(ag[1]) == 0){
+	string loadbflag = "--lb";
+	int count = 0;
+	if(flag.compare(ag[1]) == 0 && c > 2){
 		cout << "flag --g entered " << endl;
 		regex r("[[:digit:]]+");
-	if(c >= 4){
-			if(regex_match(ag[2],r) && regex_match(ag[3],r)){
-				cout << "maze has height off " << ag[2] << endl;
-				cout << "maze has width off " << ag[3] << endl;
-			return 1;
-			}	
+		// checks the input arguments and counts the number of digit input starting from argv[2]
+		// stops when reaches end of argv or reads an input that isn't a digit
+		for(int i = 2; i < c; i++){
+			if(regex_match(ag[i],r))
+				count++;
+			else
+				break;
 		}
-		return 2;	
+		// no seed, width or height specified
+		if (count == 0){
+			return 2;
+		}
+		// seed specified, no width or height
+		if (count == 1){
+			return 3;
+		}
+		//height and width specified, no seed
+		if(count == 2){
+			return 4;
+		}
+		// seed width and height specified
+		if(count == 3){
+			cout << "maze has height off " << ag[3] << endl;
+			cout << "maze has width off " << ag[4] << endl;
+			return 1;
+		}
+		//invalid number of digits		
+		return 0;	
 	}
-	
+	else if(loadbflag.compare(ag[1]) == 0){
+		//send back that main should load binary file
+		return 5;
+	}
 	return 0;
 }
 

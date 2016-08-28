@@ -8,14 +8,22 @@
 #include <fstream>
 #include <string.h>
 int main(int argc, char * argv[]){
+	int option;
 	if(argc>=8){
-			cout << "Too many inputs" << endl;
+		cout << "Too many inputs" << endl;
+		return 0;
 	}
-	if(seedInput(argv, argc)== 1){	
+	if (argc <= 1){
+		cout << "Too few inputs" << endl;
+		return 0;
+	}
+	option = seedInput(argv, argc); 
+	if(option == 1){
+		cout << "input" <<endl;
 		Generator newMaze(atoi(argv[2]),atoi(argv[3]),atoi(argv[4]));
 		newMaze.generate();
 	}
-	else if(seedInput(argv,argc) == 2){
+	else if(option == 2){
 		cout << "No height or width specified, using default height of 100, and width of 100." << endl;
 		int h = 100;
 		int w = 100;
@@ -27,5 +35,6 @@ int main(int argc, char * argv[]){
 	str[sizeof(str)-1] = '\0';
 	write_svg(newMaze.getPaths(), "maze_generator_test.svg", newMaze.getMaze().getWidth(), newMaze.getMaze().getHeight());
 */
+	
 	return 0;
 }
