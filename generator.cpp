@@ -21,11 +21,13 @@ bool Generator::generate(){
 	unsigned int holdY;
 	unsigned int nextCellIndex;
 	// select starting cell
-	std::mt19937 gen(seed);
+	std::mt19937 gen(seed*100);
 	std::uniform_int_distribution<unsigned> distWidth(0,genMaze.getWidth()-1);
 	holdX = distWidth(gen);
 	std::uniform_int_distribution<unsigned> distHeight(0,genMaze.getHeight()-1);
 	holdY =  distHeight(gen);
+	//randomly select neighbour of current cell and set as current, if neighbour
+	//is unvisited add edge between them. Continue until every cell is visited at least once
 	while(visited < genMaze.getHeight()*genMaze.getWidth()){
 		genMaze.setVisited(holdX,holdY);
 		std::uniform_int_distribution<unsigned> distN(0,genMaze.getCell(holdX,holdY).getNeighbours().size()-1);
@@ -49,6 +51,10 @@ Maze Generator::getMaze(){
 
 vector<Edge> Generator::getPaths(){
 	return paths;
+}
+
+int Generator::getSeed(){
+	return seed;
 }
 
 

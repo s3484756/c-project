@@ -106,5 +106,30 @@ int seedInput(char* ag[], int c){
 	return 0;
 }
 
+int outputOptions(char* ag[], int c, int startIndex){
+	string svgFlag = "--sv";
+	string binaryFlag = "--sb";
+	if(startIndex + 3 <= c){
+		//save to svgFile and save to binary
+		if (svgFlag.compare(ag[startIndex]) == 0 && binaryFlag.compare(ag[startIndex+2]) == 0){
+			return 1;
+		}
+		//save to binary and save to svgFile
+		else if(binaryFlag.compare(ag[startIndex]) && svgFlag.compare(ag[startIndex+2]) == 0){
+			return 2;
+		}
+		//save to binary
+		else if(binaryFlag.compare(ag[startIndex]) == 0){
+			return 3;
+		}
+		//save to svgFile 
+		else if(svgFlag.compare(ag[startIndex]) == 0){
+			return 4;
+		}
+	}
+	return 0;
+	
+}
+
 
 

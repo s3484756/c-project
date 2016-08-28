@@ -20,6 +20,7 @@ class Generator{
 	    bool generate();
 		Maze getMaze();
 		vector<Edge> getPaths();
+		int getSeed();
 		
 };
 

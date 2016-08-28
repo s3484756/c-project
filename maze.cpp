@@ -38,13 +38,13 @@ Maze::Maze (unsigned int setWidth, unsigned int setHeight){
 	for(unsigned int i = 0; i < cells.size();i++){
 		for(unsigned int j = 0; j < cells.at(i).size();j++){
 			std::cout << j << std::endl; 
-			if(i < width - 1){
+			if(i < cells.size() - 1){
 				cells.at(i).at(j).addNeighbour(&cells.at(i+1).at(j));
 			}
 			if(i > 0){
 				cells.at(i).at(j).addNeighbour(&cells.at(i-1).at(j));
 			}
-			if(j < height - 1){
+			if(j < cells.at(i).size() - 1){
 				cells.at(i).at(j).addNeighbour(&cells.at(i).at(j+1));
 			}
 			if(j > 0){
