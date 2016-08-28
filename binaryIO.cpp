@@ -1,10 +1,10 @@
 /***********************************************************************
- * Author           : Luke Ellison - Joshua Theeuf
- * Student Number   : s3484756 -  s3234575
+ * Author           : Luke Ellison
+ * Student Number   : s3484756
  ***********************************************************************/
 #include <iostream>
 #include <fstream>
-#include "generator.h"
+#include "binaryIO.h"
 using namespace std;
 
 bool binaryRead(char * filename, vector<int> * data){
@@ -13,15 +13,19 @@ bool binaryRead(char * filename, vector<int> * data){
   if (file.is_open())
   {
     while(file){
-		cout << "reading data" << endl;
 		file.read((char*)&holder, sizeof(int));
-		if(!file)
-			break;
 		data->push_back(holder);
+		file.read((char*)&holder, sizeof(int));
+		data->push_back(holder);
+		file.read((char*)&holder, sizeof(int));
+		data->push_back(holder);
+		for(int i =0; i < data->at(2)-3;++i){
+			file.read((char*)&holder, sizeof(int));
+			data->push_back(holder);
+		}
 	}
 	file.close();
-	cout << "herererere" << endl;
-    return true;
+	return true;
   }
   else{
 	return false;
@@ -32,7 +36,7 @@ bool binaryRead(char * filename, vector<int> * data){
 bool binaryWrite(char * filename, Generator gen){
   ofstream file; 
   int x;
-  file.open(filename, ios::binary | ios::out);
+  file.open(filename, ios::binary | ios::out | ios::trunc);
   if (file.is_open())
   {
 	x = gen.getMaze().getWidth();

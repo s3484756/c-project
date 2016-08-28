@@ -1,10 +1,7 @@
-/***********************************************************************
- * Author           : Luke Ellison - Joshua Theeuf
- * Student Number   : s3484756 -  s3234575
- ***********************************************************************/
 #include <string>
 #include <iostream>
 #include <regex> 
+
 using namespace std;
 bool binaryLoad(char *ag[]){
 	string validUser[5] = {"--lb","--sb","--sv",".maze",".svg"};
@@ -113,7 +110,6 @@ int seedInput(char* ag[], int c){
 int outputOptions(char* ag[], int c, int startIndex){
 	string svgFlag = "--sv";
 	string binaryFlag = "--sb";
-	string svgExt = ".svg";
 	if(startIndex + 3 <= c){
 		//save to svgFile and save to binary
 		if (svgFlag.compare(ag[startIndex]) == 0 && binaryFlag.compare(ag[startIndex+2]) == 0){
@@ -129,15 +125,6 @@ int outputOptions(char* ag[], int c, int startIndex){
 		}
 		//save to svgFile 
 		else if(svgFlag.compare(ag[startIndex]) == 0){
-					string fileName = ag[startIndex++];
-		size_t i = fileName.rfind(svgExt,fileName.length());
-			if(i!=string::npos){
-				cout << "saving to " << fileName << endl;
-			}
-			else{
-				cout << "incorrect file extension, expects .maze" << endl;
-				return false;
-			}
 			return 4;
 		}
 	}

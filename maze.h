@@ -1,6 +1,6 @@
 /***********************************************************************
- * Author           : Luke Ellison - Joshua Theeuf
- * Student Number   : s3484756 -  s3234575
+ * Author           : Luke Ellison
+ * Student Number   : s3484756
  ***********************************************************************/
 
 #include "cell.h"

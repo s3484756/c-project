@@ -1,14 +1,33 @@
 /***********************************************************************
- * Author           : Luke Ellison - Joshua Theeuf
- * Student Number   : s3484756 -  s3234575
+ * Author           : Luke Ellison
+ * Student Number   : s3484756
  ***********************************************************************/
 #include "generator.h"
 #include "userValidation.cpp"
-#include "binaryIO.cpp"
+#include "binaryIO.h"
 #include "svgWriter.cpp"
 #include <iostream>
 #include <fstream>
 #include <string.h>
+
+//control for generated maze output
+void genOutput(char *argv[], int argc, int nextIndex, Generator gen){
+	int outputOpt = outputOptions(argv,argc,nextIndex);
+	if (outputOpt == 1){
+		write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
+		binaryWrite(argv[nextIndex+3], gen);
+	}
+	if(outputOpt == 2){
+		write_svg(gen.getPaths(), argv[nextIndex+3], gen.getMaze().getWidth(), gen.getMaze().getHeight());
+		binaryWrite(argv[nextIndex+1], gen);
+	}
+	if(outputOpt == 3){
+		binaryWrite(argv[nextIndex+1], gen);
+	}
+	if(outputOpt == 4){
+		write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
+	}
+}
 
 int main(int argc, char * argv[]){
 	int option;
@@ -27,7 +46,8 @@ int main(int argc, char * argv[]){
 		Generator newMaze(atoi(argv[3]),atoi(argv[4]),atoi(argv[2]));
 		newMaze.generate();
 		nextIndex = 5;
-		binaryWrite("test.maze",newMaze);
+		genOutput(argv,argc,nextIndex,newMaze);
+		
 	}
 	else if(option == 2){//no seed, width or height specified
 		cout << "No height or width specified, using default height of 100, and width of 100." << endl;
@@ -36,6 +56,7 @@ int main(int argc, char * argv[]){
 		Generator newMaze(h,w);
 		newMaze.generate();
 		nextIndex = 2;
+		genOutput(argv,argc,nextIndex,newMaze);
 	}
 	else if(option == 3){ //no width or heoght specified, seed specified
 		cout << "No height or width specified, using default height of 100, and width of 100." << endl;
@@ -44,22 +65,28 @@ int main(int argc, char * argv[]){
 		Generator newMaze(h,w,atoi(argv[2]));
 		newMaze.generate();
 		nextIndex = 3;
+		genOutput(argv,argc,nextIndex,newMaze);
 	}
 	else if(option == 4){//width and height specifed, seed not specified
 		cout << "here" << endl;
 		Generator newMaze(atoi(argv[2]),atoi(argv[3]));
 		newMaze.generate();
 		nextIndex = 4;
+		genOutput(argv,argc,nextIndex,newMaze);
 	}
-	else if(option == 5){//loading maze from binary file
+	else if(option == 5){//loading maze from binary file and write to svg
 		vector<int> data;
-		binaryRead("test.maze",&data);
+		binaryRead(argv[2],&data);
 		vector<Edge> paths;
 		int x1,y1,x2,y2;
 	    int width = data.at(0);
 		int height = data.at(1);
 		int edgeNum = data.at(2);
-		cout << "herre" << endl;
+		cout << edgeNum << endl;
+		cout << width << endl;
+		cout << height << endl;
+		cout << data.size() << endl;
+		
 		for(int i =3; i < edgeNum-3; i+=4){
 			x1 = data.at(i);
 			y1 = data.at(i+1);
@@ -68,7 +95,7 @@ int main(int argc, char * argv[]){
 			Edge newEdge(x1,y1,x2,y2);
 			paths.push_back(newEdge);
 		}
-		write_svg(paths, argv[5], width, height);
+		write_svg(paths, argv[4], width, height);
 		return 0;
 	}
 /*	char str*;

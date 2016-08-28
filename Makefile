@@ -4,7 +4,7 @@ CXXFLAGS=-Wall -pedantic -Wextra -std=c++14
 all:mazer
 
 mazer: svgWriter.o binaryIO.o generator.o maze.o cell.o edge.o userValidation.o mazer.o
-	$(CC) generator.o maze.o cell.o edge.o mazer.o -o mazer
+	$(CC) binaryIO.o generator.o maze.o cell.o edge.o mazer.o -o mazer
 
 mazer.o:mazer.cpp
 	$(CC) $(CXXFLAGS) -c mazer.cpp
