@@ -4,36 +4,53 @@
  ***********************************************************************/
 #include <iostream>
 #include <fstream>
+#include "generator.h"
 using namespace std;
 
-char * binaryRead(char * filename){
-  streampos size;
-  char * memblock;
-  ifstream file (filename, ios::in|ios::binary|ios::ate);
+bool binaryRead(char * filename, vector<int> * data){
+  int holder;
+  ifstream file(filename, ios::in|ios::binary|ios::ate);
   if (file.is_open())
   {
-    printf("found file\n");
-    size = file.tellg();
-    memblock = new char [size];
-    file.seekg (0, ios::beg);
-    file.read (memblock, size);
-    file.close();
-
-    cout << "the entire file content is in memory";
-	return memblock;
+    while(file){
+		cout << "reading data" << endl;
+		file.read((char*)&holder, sizeof(int));
+		if(!file)
+			break;
+		data->push_back(holder);
+	}
+	file.close();
+	cout << "herererere" << endl;
+    return true;
   }
-  else 
-	cout << "Unable to open file";
-memblock = new char[1];
-  return memblock;
+  else{
+	return false;
+  }
 }
 
 
-bool binaryWrite(char * filename, char * memblock){
-  ofstream file (filename, ios::out | ios::binary);
+bool binaryWrite(char * filename, Generator gen){
+  ofstream file; 
+  int x;
+  file.open(filename, ios::binary | ios::out);
   if (file.is_open())
   {
-	file.write(memblock,sizeof(memblock));
+	x = gen.getMaze().getWidth();
+	file.write((char*)&x, sizeof(int));
+	x = gen.getMaze().getHeight();
+	file.write((char*)&x, sizeof(int));
+	x = gen.getPaths().size();
+	file.write((char*)&x, sizeof(int));
+	for(unsigned int i = 0; i < gen.getPaths().size();++i){
+		x = gen.getPaths().at(i).getX1();
+		file.write((char*)&x, sizeof(int));
+		x = gen.getPaths().at(i).getY1();
+		file.write((char*)&x, sizeof(int));
+		x = gen.getPaths().at(i).getX2();
+		file.write((char*)&x, sizeof(int));
+		x = gen.getPaths().at(i).getY2();
+		file.write((char*)&x, sizeof(int));
+	}
     file.close();
 	return true;
   }
