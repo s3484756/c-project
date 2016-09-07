@@ -3,8 +3,9 @@
 #include <fstream>
 void write_svg(vector<Edge> edges, char * filename, int width, int height){
 	ofstream file (filename, ios::out);
+	std::cout << filename << std::endl;
 	char line[100];
-	sprintf(line, "<svg viewBox='10 10 %d %d' width='%d' height='%d' xmlns='http://www.w3.org/2000/svg'>\n", width, height,width,height);
+	sprintf(line, "<svg viewBox='500 500 %d %d' width='%d' height='%d' xmlns='http://www.w3.org/2000/svg'>\n", width, height,width,height);
 	file << line;
 	sprintf(line, "<rect width='%d' height='%d' style='fill: black' />\n",width,height);
 	file << line;

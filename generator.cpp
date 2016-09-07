@@ -15,7 +15,7 @@ Generator::Generator(unsigned int width, unsigned int height) : genMaze(width,he
 	seed = rand();
 	visited = 1;
 }
-//builds paths through the maze
+
 bool Generator::generate(){
 	unsigned int holdX;
 	unsigned int holdY;
@@ -23,9 +23,9 @@ bool Generator::generate(){
 	// select starting cell
 	std::mt19937 gen(seed*100);
 	std::uniform_int_distribution<unsigned> distWidth(0,genMaze.getWidth()-1);
-	holdX = distWidth(gen);
+	holdY = distWidth(gen);
 	std::uniform_int_distribution<unsigned> distHeight(0,genMaze.getHeight()-1);
-	holdY =  distHeight(gen);
+	holdX =  distHeight(gen);
 	//randomly select neighbour of current cell and set as current, if neighbour
 	//is unvisited add edge between them. Continue until every cell is visited at least once
 	while(visited < genMaze.getHeight()*genMaze.getWidth()){
@@ -33,7 +33,7 @@ bool Generator::generate(){
 		std::uniform_int_distribution<unsigned> distN(0,genMaze.getCell(holdX,holdY).getNeighbours().size()-1);
 		nextCellIndex =  distN(gen);
 		if(genMaze.getCell(holdX,holdY).getNeighbours().at(nextCellIndex)->getVisited() != true){
-			std::cout << "number of Cells Visited:" << visited << std::endl;
+			std::cout <<"Number of cells visited: " << visited << std::endl;
 			paths.push_back(genMaze.getCell(holdX,holdY).getEdges().at(nextCellIndex));
 			visited++;
 		}
