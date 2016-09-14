@@ -1,7 +1,4 @@
-/***********************************************************************
- * Author           : Luke Ellison | Joshua Theeuf
- * Student Number   : s3484756 | s3234575
- ***********************************************************************/
+
 #include "userValidation.h"
 using namespace std;
 bool binaryLoad(char *ag[]){
@@ -65,12 +62,12 @@ bool saveBinary(char* ag[], int argIndex){
 	}	
 	return false;
 }
-//validates command line arguments for maze parameters or binary file 
 int seedInput(char* ag[], int c){
 	string flag = "--g";
 	string loadbflag = "--lb";
 	int count = 0;
 	if(flag.compare(ag[1]) == 0 && c > 2){
+		cout << "flag --g entered " << endl;
 		regex r("[[:digit:]]+");
 		// checks the input arguments and counts the number of digit input starting from argv[2]
 		// stops when reaches end of argv or reads an input that isn't a digit
@@ -94,6 +91,8 @@ int seedInput(char* ag[], int c){
 		}
 		// seed width and height specified
 		if(count == 3){
+			cout << "maze has height off " << ag[3] << endl;
+			cout << "maze has width off " << ag[4] << endl;
 			return 1;
 		}
 		//invalid number of digits		
@@ -105,11 +104,13 @@ int seedInput(char* ag[], int c){
 	}
 	return 0;
 }
-//validates commandline arguments for svg and binary file output
+
 int outputOptions(char* ag[], int c, int startIndex){
 	string svgFlag = "--sv";
 	string binaryFlag = "--sb";
 	//save to svgFile and save to binary
+	cout << startIndex << endl;
+	cout << ag[startIndex] << endl;
 	if (startIndex == c - 4){
 		if (svgFlag.compare(ag[startIndex]) == 0 && binaryFlag.compare(ag[startIndex+2]) == 0){
 			return 1;

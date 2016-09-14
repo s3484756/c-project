@@ -1,9 +1,5 @@
-/***********************************************************************
- * Author           : Luke Ellison | Joshua Theeuf
- * Student Number   : s3484756 | s3234575
- ***********************************************************************/
 #include "edge.h"
-//container class which forms a connection between two cells
+
 
 Edge::Edge (unsigned int x1coord, unsigned int y1coord, unsigned int x2coord, unsigned int y2coord){
 	x1 = x1coord;

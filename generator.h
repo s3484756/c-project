@@ -1,6 +1,6 @@
 /***********************************************************************
- * Author           : Luke Ellison | Joshua Theeuf
- * Student Number   : s3484756 | s3234575
+ * Author           : Luke Ellison
+ * Student Number   : s3484756
  ***********************************************************************/
 #include "maze.h"
 #ifndef MAZE_GENERATOR
@@ -11,16 +11,17 @@
 #include <time.h>
 
 class Generator{
-	Maze genMaze;
-	int seed;
-	unsigned int visited;
-	vector<Edge> paths; 
+	protected : Maze genMaze;
+	protected : int seed;
+	protected : vector<Edge> paths;
+	protected : unsigned int visited; 	
 	public:Generator(unsigned int height,unsigned int width, int seed);
 	public:Generator(unsigned int height, unsigned int width);
-	    bool generate();
+	    virtual bool generate();
 		Maze getMaze();
 		vector<Edge> getPaths();
 		int getSeed();
+		virtual ~Generator();
 		
 };
 
