@@ -1,3 +1,7 @@
+/***********************************************************************
+ * Author           : Luke Ellison | Joshua Theeuf
+ * Student Number   : s3484756 | s3234575
+ ***********************************************************************/
 #include "edge.h"
 //container class which forms a connection between two cells
 

@@ -1,4 +1,7 @@
-
+/***********************************************************************
+ * Author           : Luke Ellison | Joshua Theeuf
+ * Student Number   : s3484756 | s3234575
+ ***********************************************************************/
 #include "userValidation.h"
 using namespace std;
 bool binaryLoad(char *ag[]){

@@ -9,6 +9,7 @@ Known issues:
 	- The current application does not accept a maze with varying dimensions. Both height and width must be the same.
 	- The current application does not completely generate a maze when the dimensions of the maze are 35> and the seed is 10<.
 	- The current application does not generate a maze when the dimensions are small with respect to the seed value. 
+	- We also have not been able to read binary files, but have been able to save them.
 how to compile:
 	make clean.
 	make.
