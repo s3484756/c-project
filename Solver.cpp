@@ -19,3 +19,7 @@ bool Solver::pathExists(Cell current, Cell neighbour){
 bool Solver::solve(){
 	return true;
 }
+
+Maze * Solver::getMaze(){
+	return maze;
+}

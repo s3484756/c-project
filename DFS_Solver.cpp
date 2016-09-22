@@ -11,17 +11,22 @@ bool DFSSolver::solve(){
 }
 
 void DFSSolver::visitCell(unsigned int xcoord, unsigned int ycoord){
-	for(int i = 0; i < maze.getCell(xcoord,ycoord).getNeighbours().size(); ++i){
-		if(xcoord == maze.getWidth()-1 && ycoord == maze.getHeight()-1){
+	for(unsigned int i = 0; i < getMaze()->getCell(xcoord,ycoord).getNeighbours().size(); ++i){
+		if(xcoord == getMaze()->getWidth()-1 && ycoord == getMaze()->getHeight()-1){
 			solved = true;
 			return;
 		}
 		if(solved == true){
-			route.push_back(maze.getCell.getEdges().at(i));
+			route.push_back(getMaze()->getCell(xcoord,ycoord).getEdges().at(i));
 			return;
 		}
-		visitCell(maze.getCell.getNeighbours().at(i).getX(), maze.getCell.getNeighbours().at(i).getY());
-	}
+		if(pathExists(getMaze()->getCell(xcoord,ycoord),*getMaze()->getCell(xcoord,ycoord).getNeighbours().at(i))){
+			visitCell(getMaze()->getCell(xcoord,ycoord).getNeighbours().at(i)->getX(), 
+			getMaze()->getCell(xcoord,ycoord).getNeighbours().at(i)->getY());
+		}
+	}	
 }
+
+
 
 
