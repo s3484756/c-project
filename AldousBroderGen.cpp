@@ -26,12 +26,12 @@ bool AldousBroderGen::generate(){
 	//randomly select neighbour of current cell and set as current, if neighbour
 	//is unvisited add edge between them. Continue until every cell is visited at least once
 	while(visited < getMaze().getHeight()*getMaze().getWidth()){
-		getMaze().setVisited(holdX,holdY);
+		genMaze.setVisited(holdX,holdY);
 		std::uniform_int_distribution<unsigned> distN(0,getMaze().getCell(holdX,holdY).getNeighbours().size()-1);
 		nextCellIndex =  distN(gen);
 		if(getMaze().getCell(holdX,holdY).getNeighbours().at(nextCellIndex)->getVisited() != true){
 			std::cout <<"Number of cells visited: " << visited << std::endl;
-			getPaths().push_back(getMaze().getCell(holdX,holdY).getEdges().at(nextCellIndex));
+			paths.push_back(getMaze().getCell(holdX,holdY).getEdges().at(nextCellIndex));
 			visited++;
 		}
 		holdX = getMaze().getCell(holdX,holdY).getNeighbours().at(nextCellIndex)->getX();
