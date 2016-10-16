@@ -48,7 +48,7 @@ bool BFSSolver::solve(){
 			if(pathExists(currentCell, *currentCell.getNeighbours().at(i)) 
 				&& map.at(currentCell.getNeighbours().at(i)->getX()).at(currentCell.getNeighbours().at(i)->getY()) 
 			    == map.at(currentCell.getX()).at(currentCell.getY())-1){
-				route.push_back(*currentCell.getEdges().at(i));
+				route.push_back(currentCell.getEdges().at(i));
 				currentCell = *currentCell.getNeighbours().at(i);
 				break;
 			}

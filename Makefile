@@ -3,7 +3,7 @@ CXXFLAGS=-Wall -pedantic -Wextra -std=c++14
 
 all:mazer
 
-mazer: svgWriter.o binaryIO.o generator.o maze.o cell.o edge.o userValidation.o mazer.o AldousBroderGen.o Solver.o DFS_Solver.o BFSSolver.o
+mazer: svgWriter.o binaryIO.o generator.o maze.o cell.o edge.o userValidation.o mazer.o AldousBroderGen.o Solver.o DFS_Solver.o BFSSolver.o heap.o
 	$(CC) binaryIO.o userValidation.o generator.o maze.o cell.o edge.o mazer.o AldousBroderGen.o -o mazer
 
 mazer.o:mazer.cpp
@@ -30,7 +30,8 @@ BFSSolver.o:BFSSolver.cpp
 	$(CC) $(CXXFLAGS) -c BFSSolver.cpp	
 svgWriter.o:svgWriter.cpp
 	$(CC) $(CXXFLAGS) -c svgWriter.cpp
-
+heap.o:heap.cpp
+	$(CC) $(CXXFLAGS) -c heap.cpp
 
 
 .PHONY:clean
