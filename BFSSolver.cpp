@@ -17,9 +17,10 @@ bool BFSSolver::solve(){
 	Cell currentCell = getMaze()->getCell(0,0);
 	vector<Cell> cellQueue;
 	cellQueue.push_back(currentCell);
+	map.at(0).at(0) = 1;
 	// continues until final cell (width-1,height-1) is reached
 	while(currentCell.getX() != getMaze()->getWidth()-1 
-		&& currentCell.getY() != getMaze()->getHeight()-1){
+		|| currentCell.getY() != getMaze()->getHeight()-1){
 		
 		for(unsigned int i = 0; i < currentCell.getNeighbours().size();++i){
 			//checks if there is a path between the two neighbouring cells and if the neighbouring
@@ -28,14 +29,13 @@ bool BFSSolver::solve(){
 			if(pathExists(currentCell, *currentCell.getNeighbours().at(i)) 
 				&& map.at(currentCell.getNeighbours().at(i)->getX()).at(currentCell.getNeighbours().at(i)->getY()) == 0){
 				cellQueue.push_back(*currentCell.getNeighbours().at(i));
-				map.at(currentCell.getX()).at(currentCell.getY()) =
-				map.at(currentCell.getX()).at(currentCell.getY()) + 1;
+				map.at(currentCell.getNeighbours().at(i)->getX()).at(currentCell.getNeighbours().at(i)->getY()) = 
+				map.at(currentCell.getX()).at(currentCell.getY())+1;
 			}
+			
 		}
+		
 		//If no more cells in the queue maze is unsolveable
-		
-		
-		printf("index %d\n",index);
 		if(index == cellQueue.size()){
 			return false;
 		}
@@ -44,7 +44,14 @@ bool BFSSolver::solve(){
 		
 	}
 	//builds path by stepping back through the maze
-	while(currentCell.getX() != 0 && currentCell.getY() != 0){
+	for(int i = 0; i < map.size();++i){
+			for(int j = 0; j < map.at(i).size();++j)
+				printf(" %d ", map.at(i).at(j));
+		printf("\n");
+	}
+	
+	while(currentCell.getX() != 0 || currentCell.getY() != 0){
+		printf("current cell %d, %d\n",currentCell.getX(),currentCell.getY());
 		for(unsigned int i = 0; i < currentCell.getNeighbours().size();++i){
 			//checks if there is a path between the two neighbouring cells and if the neighbouring
 			//cells step-size is one less than the current
@@ -53,7 +60,7 @@ bool BFSSolver::solve(){
 			    == map.at(currentCell.getX()).at(currentCell.getY())-1){
 				route.push_back(currentCell.getEdges().at(i));
 				currentCell = *currentCell.getNeighbours().at(i);
-				break;
+				
 			}
 		}
 		

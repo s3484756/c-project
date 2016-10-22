@@ -12,7 +12,7 @@ template<class type> bool Heap<type>::add(type node){
 	type * temp;
 	int index;
 	if(this->size() == 0)
-		this->push_back(*temp);
+		this->push_back(node);
 	this->push_back(node);
 	index = this->size()-1;
 	while(this->at(index/2) > node && index > 1){

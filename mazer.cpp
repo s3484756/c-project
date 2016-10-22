@@ -2,6 +2,7 @@
  * Author           : Luke Ellison
  * Student Number   : s3484756
  ***********************************************************************/
+#include "ellerGen.h"
 #include "AldousBroderGen.h"
 #include "userValidation.h"
 #include "binaryIO.h"
@@ -71,7 +72,7 @@ int main(int argc, char * argv[]){
 	}
 	else if(option == 4){//width and height specifed, seed not specified
 		cout << "here" << endl;
-		AldousBroderGen newMaze(atoi(argv[2]),atoi(argv[3]));
+		EllerGen newMaze(atoi(argv[2]),atoi(argv[3]));
 		newMaze.generate();
 		Maze temp = newMaze.getMaze();
 		BFSSolver solution(temp,newMaze.getPaths());
