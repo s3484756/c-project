@@ -3,10 +3,11 @@
  * Student Number   : s3484756
  ***********************************************************************/
 
-#include "cell.h"
-#include <iostream>
 #ifndef MAZE
 #define MAZE
+
+#include "cell.h"
+#include <iostream>
 
 class Maze{
 	unsigned int height;

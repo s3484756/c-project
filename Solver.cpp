@@ -1,7 +1,7 @@
 #include "Solver.h"
 
-Solver::Solver(Maze * genMaze, vector<Edge> route){
-	maze = genMaze;
+Solver::Solver(Maze &genMaze, vector<Edge> route){
+	maze = &genMaze;
 	paths = route;
 }
 
@@ -18,6 +18,10 @@ bool Solver::pathExists(Cell current, Cell neighbour){
 }
 bool Solver::solve(){
 	return true;
+}
+
+vector<Edge> Solver::getPaths(){
+	return route;
 }
 
 Maze * Solver::getMaze(){

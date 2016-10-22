@@ -5,7 +5,8 @@
 #include "AldousBroderGen.h"
 #include "userValidation.h"
 #include "binaryIO.h"
-#include "svgWriter.cpp"
+void write_svg(vector<Edge> edges, vector<Edge> route, char * filename, int width, int height);
+#include "BFSSolver.h"
 #include <iostream>
 #include <fstream>
 #include <string.h>
@@ -15,18 +16,18 @@ void genOutput(char *argv[], int argc, int nextIndex, Generator gen){
 	int outputOpt = outputOptions(argv,argc,nextIndex);
 	cout << outputOpt << endl;
 	if (outputOpt == 1){
-		write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
+		//write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
 		binaryWrite(argv[nextIndex+3], gen);
 	}
 	if(outputOpt == 2){
-		write_svg(gen.getPaths(), argv[nextIndex+3], gen.getMaze().getWidth(), gen.getMaze().getHeight());
+		//write_svg(gen.getPaths(), argv[nextIndex+3], gen.getMaze().getWidth(), gen.getMaze().getHeight());
 		binaryWrite(argv[nextIndex+1], gen);
 	}
 	if(outputOpt == 3){
 		binaryWrite(argv[nextIndex+1], gen);
 	}
 	if(outputOpt == 4){
-		write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
+		//write_svg(gen.getPaths(), argv[nextIndex+1], gen.getMaze().getWidth(), gen.getMaze().getHeight());
 	}
 }
 
@@ -72,8 +73,13 @@ int main(int argc, char * argv[]){
 		cout << "here" << endl;
 		AldousBroderGen newMaze(atoi(argv[2]),atoi(argv[3]));
 		newMaze.generate();
+		Maze temp = newMaze.getMaze();
+		BFSSolver solution(temp,newMaze.getPaths());
+		solution.solve();
 		nextIndex = 4;
-		genOutput(argv,argc,nextIndex,newMaze);
+		cout << solution.getPaths().size() << endl;
+		write_svg(newMaze.getPaths(),solution.getPaths(), argv[nextIndex+1], newMaze.getMaze().getWidth(), newMaze.getMaze().getHeight());
+		//genOutput(argv,argc,nextIndex,newMaze);
 	}
 	else if(option == 5){//loading maze from binary file and write to svg
 		vector<int> data;
@@ -96,7 +102,7 @@ int main(int argc, char * argv[]){
 			Edge newEdge(x1,y1,x2,y2);
 			paths.push_back(newEdge);
 		}
-		write_svg(paths, argv[4], width, height);
+		//write_svg(paths, argv[4], width, height);
 		return 0;
 	}
 /*	char str*;

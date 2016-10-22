@@ -1,6 +1,6 @@
 #include "BFSSolver.h"
 
-BFSSolver::BFSSolver(Maze * genMaze, vector<Edge> route) : Solver(genMaze, route){
+BFSSolver::BFSSolver(Maze &genMaze, vector<Edge> route) : Solver(genMaze, route){
 	for(unsigned int i = 0; i < getMaze()->getWidth(); ++i){
 		vector<int> tempVec;
 		for(unsigned int j = 0; j < getMaze()->getHeight();++j){
@@ -33,6 +33,9 @@ bool BFSSolver::solve(){
 			}
 		}
 		//If no more cells in the queue maze is unsolveable
+		
+		
+		printf("index %d\n",index);
 		if(index == cellQueue.size()){
 			return false;
 		}
